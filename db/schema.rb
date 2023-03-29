@@ -10,8 +10,51 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 0) do
+ActiveRecord::Schema[7.0].define(version: 2023_03_29_143518) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
+  create_table "diagnoses", force: :cascade do |t|
+    t.string "name"
+    t.text "description"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "specialties", force: :cascade do |t|
+    t.string "name"
+    t.text "description"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "specialty_diagnoses", force: :cascade do |t|
+    t.bigint "specialty_id", null: false
+    t.bigint "diagnosis_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["diagnosis_id"], name: "index_specialty_diagnoses_on_diagnosis_id"
+    t.index ["specialty_id"], name: "index_specialty_diagnoses_on_specialty_id"
+  end
+
+  create_table "symptom_diagnoses", force: :cascade do |t|
+    t.bigint "symptom_id", null: false
+    t.bigint "diagnosis_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["diagnosis_id"], name: "index_symptom_diagnoses_on_diagnosis_id"
+    t.index ["symptom_id"], name: "index_symptom_diagnoses_on_symptom_id"
+  end
+
+  create_table "symptoms", force: :cascade do |t|
+    t.string "name"
+    t.text "description"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_foreign_key "specialty_diagnoses", "diagnoses"
+  add_foreign_key "specialty_diagnoses", "specialties"
+  add_foreign_key "symptom_diagnoses", "diagnoses"
+  add_foreign_key "symptom_diagnoses", "symptoms"
 end
