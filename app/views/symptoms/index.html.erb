@@ -1,1 +1,10 @@
 <h1>This is symptoms index</h1>
+
+<% @previous_symptoms.each do |symptom_record| %>
+  <div><%= symptom_record.symptom.name %></div>
+<% end %>
+
+<%= form_with url: symptoms_path, method: :post do |form| %>
+  <%= form.select :id, options_for_select(@symptoms.collect { |symptom| [symptom.name, symptom.id] }) %>
+  <%= form.submit 'Record Symptom' %>
+<% end %>
