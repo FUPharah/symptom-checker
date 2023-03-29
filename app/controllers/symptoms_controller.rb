@@ -1,47 +1,30 @@
 class SymptomsController < ApplicationController
+  before_action :load_previous_symptoms, only: [:index, :show]
 
   def index
+    @symptoms = Symptom.all
   end
 
   def show
-  end
-
-  def new
-    @symptom = Symptom.new
+    @symptom = Symptom.find(params[:id])
   end
 
   def create
-    @symptom = Symptom.new(params[:symptom])
-    if @symptom.save
-      redirect_to @symptom, :notice => "Successfully created symptom."
+    @symptom_record = current_user.symptom_records.new(symptom_params)
+    if @symptom_record.save
+      redirect_to symptoms_path, notice: 'Symptom recorded successfully.'
     else
-      render :action => 'new'
+      render :index
     end
-  end
-
-  def edit
-  end
-
-  def update
-    if @symptom.update_attributes(params[:symptom])
-      redirect_to @symptom, :notice  => "Successfully updated symptom."
-    else
-      render :action => 'edit'
-    end
-  end
-
-  def destroy
-    @symptom.destroy
-    redirect_to symptoms_url, :notice => "Successfully destroyed symptom."
   end
 
   private
 
-  def find_symptom
-    @symptom = Symptom.find(params[:id])
+  def symptom_params
+    params.require(:symptom).permit(:id)
   end
 
-  def find_symptoms
-    @symptoms = Symptom.all
+  def load_previous_symptoms
+    @previous_symptoms = current_user.symptom_records.includes(:symptom)
   end
 end
