@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_03_29_160658) do
+ActiveRecord::Schema[7.0].define(version: 2023_03_31_013945) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -37,6 +37,15 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_29_160658) do
     t.index ["specialty_id"], name: "index_specialty_diagnoses_on_specialty_id"
   end
 
+  create_table "specialty_symptoms", force: :cascade do |t|
+    t.bigint "specialty_id", null: false
+    t.bigint "symptom_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["specialty_id"], name: "index_specialty_symptoms_on_specialty_id"
+    t.index ["symptom_id"], name: "index_specialty_symptoms_on_symptom_id"
+  end
+
   create_table "symptom_diagnoses", force: :cascade do |t|
     t.bigint "symptom_id", null: false
     t.bigint "diagnosis_id", null: false
@@ -53,6 +62,15 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_29_160658) do
     t.index ["symptom_id"], name: "index_symptom_records_on_symptom_id"
   end
 
+  create_table "symptom_specialties", force: :cascade do |t|
+    t.bigint "symptom_id", null: false
+    t.bigint "specialty_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["specialty_id"], name: "index_symptom_specialties_on_specialty_id"
+    t.index ["symptom_id"], name: "index_symptom_specialties_on_symptom_id"
+  end
+
   create_table "symptoms", force: :cascade do |t|
     t.string "name"
     t.text "description"
@@ -67,7 +85,11 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_29_160658) do
 
   add_foreign_key "specialty_diagnoses", "diagnoses"
   add_foreign_key "specialty_diagnoses", "specialties"
+  add_foreign_key "specialty_symptoms", "specialties"
+  add_foreign_key "specialty_symptoms", "symptoms"
   add_foreign_key "symptom_diagnoses", "diagnoses"
   add_foreign_key "symptom_diagnoses", "symptoms"
   add_foreign_key "symptom_records", "symptoms"
+  add_foreign_key "symptom_specialties", "specialties"
+  add_foreign_key "symptom_specialties", "symptoms"
 end

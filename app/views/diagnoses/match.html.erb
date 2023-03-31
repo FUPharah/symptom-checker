@@ -1,0 +1,15 @@
+<h1>Matching Diagnoses and Specialties</h1>
+
+<h2>Diagnoses:</h2>
+<ul>
+  <% @diagnoses.each do |diagnosis| %>
+    <li><%= diagnosis.name %></li>
+  <% end %>
+</ul>
+
+<h2>Specialties:</h2>
+<ul>
+  <% @specialties.each do |specialty| %>
+    <li><%= specialty.name %></li>
+  <% end %>
+</ul>
