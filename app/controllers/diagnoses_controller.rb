@@ -1,39 +1,18 @@
 class DiagnosesController < ApplicationController
+  before_action :find_diagnosis, only: [:show]
 
   def index
+    @diagnoses = Diagnosis.all
   end
 
-  def show
+  def match
+    selected_symptoms = Symptom.where(id: params[:symptom_ids])
+    matching_diagnoses = Diagnosis.includes(:symptoms, :specialties).where(symptoms: { id: selected_symptoms }).references(:symptoms)
+    @diagnoses = matching_diagnoses
+    @specialties = matching_diagnoses.flat_map(&:specialties).uniq
   end
 
-  def new
-    @diagnosis = Diagnosis.new
-  end
 
-  def create
-    @diagnosis = Diagnosis.new(params[:diagnosis])
-    if @diagnosis.save
-      redirect_to @diagnosis, :notice => "Successfully created diagnosis."
-    else
-      render :action => 'new'
-    end
-  end
-
-  def edit
-  end
-
-  def update
-    if @diagnosis.update_attributes(params[:diagnosis])
-      redirect_to @diagnosis, :notice  => "Successfully updated diagnosis."
-    else
-      render :action => 'edit'
-    end
-  end
-
-  def destroy
-    @diagnosis.destroy
-    redirect_to diagnoses_url, :notice => "Successfully destroyed diagnosis."
-  end
 
   private
 

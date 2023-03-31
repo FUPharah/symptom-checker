@@ -1,10 +1,14 @@
 class SymptomsController < ApplicationController
-  before_action :load_previous_symptoms, only: [:index, :show]
+  # before_action :load_previous_symptoms, only: [:index, :show]
 
   def index
     @symptoms = Symptom.all
   end
 
+  def select
+    @symptoms = Symptom.all
+  end
+  
   def show
     @symptom = Symptom.find(params[:id])
   end
@@ -24,7 +28,7 @@ class SymptomsController < ApplicationController
     params.require(:symptom).permit(:id)
   end
 
-  def load_previous_symptoms
-    @previous_symptoms = current_user.symptom_records.includes(:symptom)
-  end
+  # def load_previous_symptoms
+  #   @previous_symptoms = current_user.symptom_records.includes(:symptom)
+  # end
 end

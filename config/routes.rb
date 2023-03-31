@@ -4,7 +4,9 @@ Rails.application.routes.draw do
 
   # Defines the root path route ("/")
   # root "articles#index"
+    get 'symptoms/select', to: 'symptoms#select', as: :select_symptoms
+    post 'diagnoses/match', to: 'diagnoses#match', as: :match_diagnoses
     resources :symptoms, only: [:index, :show]
     resources :specialties, only: [:index, :show]
-    resources :diagnoses, only: [:index, :show]
+    resources :diagnoses, only: [:index]
 end

@@ -1,0 +1,16 @@
+<h1>Select Symptoms</h1>
+
+<%= form_with url: match_diagnoses_path, method: :post, local: true do %>
+  <div class="row">
+    <% @symptoms.each do |symptom| %>
+      <div class="col-md-4">
+        <div class="form-check">
+          <%= check_box_tag "symptom_ids[]", symptom.id, false, class: "form-check-input" %>
+          <%= label_tag "symptom_ids[]", symptom.name, class: "form-check-label" %>
+        </div>
+      </div>
+    <% end %>
+  </div>
+  <%= submit_tag "Match Diagnosis", class: "btn btn-primary mt-3" %>
+<% end %>
+

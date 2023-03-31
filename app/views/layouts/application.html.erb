@@ -1,16 +1,38 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>SymptomChecker</title>
+    <title>Symptom Checker</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
     <%= javascript_include_tag "application", "data-turbo-track": "reload", defer: true %>
+    <%# <%= favicon_link_tag "favicon-32x32.png", rel: "icon", type: "image/png" %>
+
+    <!-- Add your meta tags and Open Graph data if needed -->
+
   </head>
 
-  <body>
-    <%= yield %>
+  <body id="page-container">
+
+    <%= render "shared/navbar" %>
+
+    <% if content_for?(:mainpage) %>
+      <%= yield(:mainpage) %>
+    <% else %>
+      <div class="banner" style="background-image: linear-gradient(rgba(0,0,0,0.4),rgba(0,0,0,0.4)), url(<%= asset_path 'banner_image.jpg' %>); background-position: center; background-repeat: no-repeat; background-size: cover;">
+        <div class="container">
+          <h1>Symptom Checker <strong></strong><strong></strong></h1>
+          <p>Symptom checker helps you identify your illness and guides you.</p>
+          <a class="btn btn-flat" href="symptoms/select">Check it out!</a>
+        </div>
+      </div>
+
+      <div class="subpage-container">
+        <%= yield %>
+      </div>
+    <% end %>
+    <%#= render "shared/footer" %>
   </body>
 </html>

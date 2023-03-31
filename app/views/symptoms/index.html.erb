@@ -1,10 +1,18 @@
-<h1>This is symptoms index</h1>
+<% content_for :mainpage do %>
+  <h1>This is symptoms index</h1>
 
-<% @previous_symptoms.each do |symptom_record| %>
-  <div><%= symptom_record.symptom.name %></div>
-<% end %>
-
-<%= form_with url: symptoms_path, method: :post do |form| %>
-  <%= form.select :id, options_for_select(@symptoms.collect { |symptom| [symptom.name, symptom.id] }) %>
-  <%= form.submit 'Record Symptom' %>
+  <div class="container mt-4">
+    <div class="row">
+      <% @symptoms.each do |symptom| %>
+        <div class="col-md-4 col-sm-6 mb-4">
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title"><%= symptom.name %></h5>
+              <p class="card-text"><%= symptom.description %></p>
+            </div>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
 <% end %>

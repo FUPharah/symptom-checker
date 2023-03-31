@@ -1,0 +1,23 @@
+<h1>Matched Diagnoses</h1>
+
+<% if @matched_diagnoses.empty? %>
+  <p>No diagnoses matched the selected symptoms.</p>
+<% else %>
+  <ul>
+    <% @matched_diagnoses.each do |diagnosis| %>
+      <li><%= diagnosis.name %></li>
+    <% end %>
+  </ul>
+<% end %>
+
+<h1>Matched Specialties</h1>
+
+<% if @matched_specialties.empty? %>
+  <p>No specialties matched the selected symptoms.</p>
+<% else %>
+  <ul>
+    <% @matched_specialties.each do |specialty| %>
+      <li><%= specialty.name %></li>
+    <% end %>
+  </ul>
+<% end %>
