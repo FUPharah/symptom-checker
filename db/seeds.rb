@@ -131,9 +131,15 @@ symptom_list = [
 ]
 
 symptom_list.each do |symptom|
+  # new_symptom = Symptom.create!(name: symptom[:name], description: symptom[:description])
+  # matching_diagnoses = Diagnosis.where(name: symptom[:diagnosis])
+  # matching_specialty = Specialty.where(name: symptom[:specialty])
+  # new_symptom.diagnoses << matching_diagnoses
+  # new_symptom.specialties << matching_specialty
+
   new_symptom = Symptom.create!(name: symptom[:name], description: symptom[:description])
-  matching_diagnoses = Diagnosis.where(name: symptom[:diagnosis])
-  matching_specialty = Specialty.where(name: symptom[:specialty])
+  matching_diagnoses = Diagnosis.find_or_create_by(name: symptom[:diagnosis])
+  matching_specialty = Specialty.find_or_create_by(name: symptom[:specialty])
   new_symptom.diagnoses << matching_diagnoses
   new_symptom.specialties << matching_specialty
 end

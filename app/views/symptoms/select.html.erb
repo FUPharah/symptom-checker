@@ -1,6 +1,6 @@
 <h1>Select Symptoms</h1>
 
-<%= form_with url: match_diagnoses_path, method: :post, local: true do %>
+<%= form_with url: match_diagnoses_path, method: :post do %>
   <div class="row">
     <% @symptoms.each do |symptom| %>
       <div class="col-md-4">
@@ -13,4 +13,3 @@
   </div>
   <%= submit_tag "Match Diagnosis", class: "btn btn-primary mt-3" %>
 <% end %>
-
