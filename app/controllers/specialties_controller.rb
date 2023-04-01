@@ -1,7 +1,9 @@
 class SpecialtiesController < ApplicationController
 
+  before_action :find_specialty, only: [:show, :edit, :update, :destroy]
+  before_action :find_specialties, only: [:index, :match_results]
+
   def index
-    @specialties = Specialty.all
   end
 
   def show
@@ -12,7 +14,7 @@ class SpecialtiesController < ApplicationController
   end
 
   def create
-    @specialty = Specialty.new(params[:specialty])
+    @specialty = Specialty.new(specialty_params)
     if @specialty.save
       redirect_to @specialty, :notice => "Successfully created specialty."
     else
@@ -24,7 +26,7 @@ class SpecialtiesController < ApplicationController
   end
 
   def update
-    if @specialty.update_attributes(params[:specialty])
+    if @specialty.update_attributes(specialty_params)
       redirect_to @specialty, :notice  => "Successfully updated specialty."
     else
       render :action => 'edit'
@@ -36,6 +38,7 @@ class SpecialtiesController < ApplicationController
     redirect_to specialties_url, :notice => "Successfully destroyed specialty."
   end
 
+
   private
 
   def find_specialty
@@ -44,5 +47,9 @@ class SpecialtiesController < ApplicationController
 
   def find_specialties
     @specialties = Specialty.all
+  end
+
+  def specialty_params
+    params.require(:specialty).permit(:name)
   end
 end

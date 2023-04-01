@@ -100,7 +100,7 @@ specialty_list.each do |specialty|
 end
 
 symptom_list = [
-  { name: "Headache", description: "A continuous pain in the head.", diagnosis: "Migraine", specialty: "Neurology" },
+  { name: "Headache", description: "A continuous pain in the head.", diagnosis: ["Migraine", "Hypertension"], specialty: ["Neurology", "Cardiology"] },
   { name: "Nausea", description: "A feeling of sickness with an inclination to vomit.", diagnosis: "Migraine", specialty: "Neurology" },
   { name: "Sensitivity to light", description: "An increased discomfort or pain in the eyes when exposed to light.", diagnosis: "Migraine", specialty: "Neurology" },
   { name: "Sensitivity to sound", description: "An increased discomfort or pain in the ears when exposed to sound.", diagnosis: "Migraine", specialty: "Neurology" },
@@ -118,7 +118,7 @@ symptom_list = [
   { name: "Upper abdominal pain", description: "Pain or discomfort in the upper part of the abdomen.", diagnosis: "Gall stones", specialty: "General surgery" },
   { name: "Vomiting", description: "The involuntary emptying of stomach contents through the mouth.", diagnosis: "Gall stones", specialty: "General surgery" },
   { name: "Intestinal gas", description: "Excess gas in the intestines, leading to bloating and flatulence.", diagnosis: "Gall stones", specialty: "General surgery" },
-  { name: "High fever", description: "An abnormally high body temperature, usually accompanied by shivering and weakness.", diagnosis: "Inflammation"},
+  { name: "High fever", description: "An abnormally high body temperature, usually accompanied by shivering and weakness.", diagnosis: "Inflammation", specialty: "ENT" },
   { name: "Bloating", description: "A feeling of fullness or swelling in the abdomen, often due to gas or fluid retention.", diagnosis: "Gastritis", specialty: "Gastroenterology" },
   { name: "Fast heartbeat", description: "A rapid or irregular heart rate, also known as tachycardia.", diagnosis: "Hypertension", specialty: "Cardiology" },
   { name: "Sweating", description: "The release of moisture from the sweat glands in the skin, often in response to heat or stress.", diagnosis: "Diabetes mellitus", specialty: "Endocrinology" },
