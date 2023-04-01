@@ -1,6 +1,6 @@
 <h1>Select Symptoms</h1>
 
-<%= form_with url: match_diagnoses_path, method: :post do %>
+<%= form_with url: match_diagnoses_path, method: :post, local: true, data: { turbo: false } do %>
   <div class="row">
     <% @symptoms.each do |symptom| %>
       <div class="col-md-4">
